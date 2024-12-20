@@ -1,0 +1,57 @@
+/* board detay sayfası için genel stil */
+.board-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  /* Başlık stil */
+  .board-detail h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  /* Board detay içeriği */
+  .board-content {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Yükleniyor mesajı */
+  .loading {
+    font-size: 1.5rem;
+    color: #e67e22;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Hata mesajı */
+  .error-message {
+    font-size: 1.5rem;
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Board detaylarını içeren liste veya alt başlıklar */
+  .board-details-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .board-details-list li {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin-bottom: 10px;
+  }
+  
+  .board-details-list li span {
+    font-weight: bold;
+  }
+  

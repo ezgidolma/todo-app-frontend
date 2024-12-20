@@ -1,0 +1,8 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #1d2125;
+    color: #ffffff; /* Varsayılan metin rengi beyaz */
+    font-family: Arial, sans-serif; /* İsteğe bağlı: Varsayılan font */
+    height: 100%;
+  }

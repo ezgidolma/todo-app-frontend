@@ -1,0 +1,111 @@
+/* Register Page Container - Koyu arka plan */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2d3436; /* Koyu gri arka plan */
+    background-image: url('/path-to-dark-background.jpg'); /* Koyu bir arka plan görseli */
+    background-size: cover;
+    background-position: center;
+    transition: background-color 0.5s ease; /* Yumuşak geçiş */
+}
+
+/* Register Card - Modern form */
+.register-card {
+    background-color: rgba(44, 47, 54, 0.9); /* Yarı saydam koyu gri form arka planı */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.3); /* Daha yumuşak gölge */
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for the register card */
+.register-card:hover {
+    transform: translateY(-10px); /* Yüzer efekt */
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.4); /* Daha derin gölge */
+}
+
+/* Register Title - Koyu renk metin */
+.register-title {
+    font-size: 40px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #1a6dff; /* Navbar'daki mavi renk ile uyumlu */
+    text-transform: uppercase; /* Başlık için stil */
+    letter-spacing: 1.5px; /* Harf aralığı */
+}
+
+/* Register Form */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Register Input Fields - Koyu inputlar */
+.register-input {
+    padding: 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #333;
+    color: #f1f1f1;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Input focus state */
+.register-input:focus {
+    border-color: #1a6dff; /* Navbar'daki mavi renk ile uyumlu */
+    background-color: #444; /* Input'un arka planını hafif aç */
+    outline: none;
+}
+
+/* Register Button - Koyu buton */
+.register-button {
+    background-color: #1a6dff;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Register Button Hover */
+.register-button:hover {
+    background-color: #0f57d3;
+    transform: translateY(-2px); /* Hover'da buton yükselir */
+}
+
+/* Login Link - Koyu tema ile uyumlu link */
+.login-link {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #f1f1f1;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for login link */
+.login-link:hover {
+    color: #1a6dff; /* Link rengini hover'da değiştir */
+}
+
+/* Login Link Anchor */
+.login-link a {
+    color: #f1f1f1;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for anchor */
+.login-link a:hover {
+    color: #1a6dff;
+    text-decoration: underline;
+}
