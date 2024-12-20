@@ -18,7 +18,7 @@ export const Navbar = () => {
   };
 
   const handleHomeClick = () => {
-    navigate("/board");
+    navigate("/home");
   };
 
   const handleLogoutClick = () => {

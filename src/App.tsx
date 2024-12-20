@@ -1,4 +1,4 @@
-import {  Routes, Route, Navigate, Outlet, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet  } from 'react-router-dom';
 import { AuthProvider, useAuth } from './components/AuthContext'; // AuthContext bileşenleri
 import LoginPage from './components/LoginPage'; // LoginPage
 import RegisterPage from './components/RegisterPage'; // RegisterPage
@@ -56,9 +56,8 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+
+      <AppRoutes />
     </AuthProvider>
   );
 };
