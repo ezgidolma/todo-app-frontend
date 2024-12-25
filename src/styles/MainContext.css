@@ -1,0 +1,301 @@
+/* Genel Main Content Alanı */
+.main-content {
+  padding: 20px;
+  background-color: #1d2125; /* Koyu arka plan */
+  color: #9eacba; /* Nötr metin rengi */
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ekranın tamamını kapsasın */
+ 
+}
+
+/* Başlıklar */
+.section-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  color: #ffffff; /* Beyaz başlık rengi */
+}
+
+.section-title .icon {
+  margin-right: 10px;
+  color: #579dff; /* Mavi ikon rengi */
+  font-size: 22px;
+}
+
+/* Liste Stilleri */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  background-color: #2e353a; /* Koyu arka plan */
+  color: #d9d9d9; /* Açık gri metin */
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.list-item:hover {
+  background-color: #4c5358; /* Hover rengi */
+  color: #ffffff; /* Beyaz metin */
+  transform: translateY(-2px); /* Hafif yukarı hareket */
+}
+
+/* Yıldızlı Panolar */
+.starred {
+  color: #f1c40f; /* Sarı yıldız */
+  font-size: 18px;
+}
+
+/* Genel Butonlar */
+.action-button {
+  background-color: #579dff; /* Mavi arka plan */
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #4a90e2;
+  transform: translateY(-2px); /* Hover sırasında yukarı */
+}
+
+/* Modal Alanı */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2e353a; /* Modal arka planı */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 25px;
+  width: 400px;
+  max-width: 90%;
+  z-index: 1000;
+}
+
+.modal h4 {
+  color: #ffffff; /* Beyaz başlık */
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+.modal input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #4c5358;
+  border-radius: 6px;
+  background-color: #1d2125;
+  color: #d9d9d9;
+  font-size: 14px;
+}
+
+.modal input::placeholder {
+  color: #9eacba;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-buttons button {
+  flex: 1;
+  margin: 0 8px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-buttons button:first-child {
+  background-color: #579dff;
+  color: white;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #4a90e2;
+  transform: translateY(-2px);
+}
+
+.modal-buttons button:last-child {
+  background-color: #e74c3c; /* Kırmızı buton */
+  color: white;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Çalışma Alanı Ayarları */
+.workspace-settings input {
+  width: calc(100% - 10px);
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #4c5358;
+  border-radius: 6px;
+  background-color: #1d2125;
+  color: #9eacba;
+  font-size: 14px;
+}
+
+.workspace-settings button {
+  background-color: #579dff;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.workspace-settings button:hover {
+  background-color: #4a90e2;
+  transform: translateY(-2px);
+}
+
+.workspace-settings button:last-child {
+  background-color: #e74c3c;
+}
+
+.workspace-settings button:last-child:hover {
+  background-color: #c0392b;
+}
+
+.star-icon {
+  color: #ccc; /* Varsayılan gri renk */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.star-icon.starred {
+  color: #f1c40f; /* Sarı renk */
+}
+
+.workspace-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.board-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: contents; /* Grid düzenini child öğelerle paylaşır */
+}
+
+.board-item {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  padding: 16px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.board-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.board-item span {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ekranın tamamını kapsasın */
+  padding-bottom: 80px; /* Alt kısmın taşmasını engellemek için padding ekledik */
+}
+
+.main-content .section-title {
+  margin: 20px 0;
+}
+
+.main-content .board-list,
+.main-content .recent-list,
+.main-content .starred-boards ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.main-content .create-workspace,
+.main-content .create-board {
+  margin-top: 20px;
+}
+
+.create-board-modal,
+.create-workspace-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 100;
+}
+
+.create-board-modal .modal-content,
+.create-workspace-modal .modal-content {
+  max-width: 400px;
+  width: 100%;
+}
+
+.create-board-modal button,
+.create-workspace-modal button {
+  margin-right: 10px;
+}
+
+.workspace-section {
+  margin-top: 20px;
+}
+
+.board-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.star-icon {
+  color: #d3d3d3;
+}
+
+.star-icon.starred {
+  color: gold;
+}
+
+.board-item:hover {
+  background-color: #f4f4f4;
+}

@@ -1,59 +1,78 @@
-import { FaTrello, FaSearch, FaChevronDown, FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import "../styles/Navbar.css";
 import axios from "axios";
+import NavbarLeft from "./NavbarLeft";
+import NavbarRight from "./NavbarRight";
+import "../styles/Navbar.css";
+import { useWorkspace } from "./context/WorkspaceContext";
 
-export const Navbar = () => {
+// Type definitions for API responses
+interface Workspace {
+  id: string;
+  title: string;
+}
+
+interface Board {
+  id: string;
+  title: string;
+  workspaceId: string;
+  isStarred: boolean;
+}
+
+const Navbar: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [workspaces, setWorkspaces] = useState<any[]>([]);
-  const [starredBoardsByWorkspace, setStarredBoardsByWorkspace] = useState<any>({});
-  const [recentBoards, setRecentBoards] = useState<any[]>([]);
+  const { workspaces, setWorkspaces } = useWorkspace();
+  const [starredBoardsByWorkspace, setStarredBoardsByWorkspace] = useState<{ [key: string]: Board[] }>({});
+  const [recentBoards, setRecentBoards] = useState<Board[]>([]);
+  const [showCreateWorkspaceForm, setShowCreateWorkspaceForm] = useState(false);
 
+  // Toggle dropdown menu
   const toggleDropdown = (dropdown: string) => {
     setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
   };
 
-  const handleHomeClick = () => {
-    navigate("/home");
-  };
-
-  const handleLogoutClick = () => {
-    logout();
-    navigate("/login");
-  };
-
-  const saveToRecentlyBoards = (board: any) => {
-    const updatedBoards = [board, ...recentBoards];
-    if (updatedBoards.length > 5) updatedBoards.pop();
+  // Save the board to recent boards
+  const saveToRecentlyBoards = (board: Board) => {
+    const updatedBoards = [board, ...recentBoards].slice(0, 5); // Keep only the 5 most recent boards
     setRecentBoards(updatedBoards);
     localStorage.setItem("recentBoards", JSON.stringify(updatedBoards));
   };
 
-  const fetchWorkspaces = async () => {
-    const instance = axios.create({
-      baseURL: 'http://localhost:3000',
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  // Create axios instance with token
+  const createAxiosInstance = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found");
+      return null;
+    }
+
+    return axios.create({
+      baseURL: "http://localhost:3000",
+      headers: { Authorization: `Bearer ${token}` },
       timeout: 1000,
     });
+  };
+
+  // Fetch workspaces from the API
+  const fetchWorkspaces = async () => {
+    const instance = createAxiosInstance();
+    if (!instance) return;
 
     try {
-      const response = await instance.get('/workspaces');
+      const response = await instance.get<Workspace[]>('http://localhost:3000/workspaces');
       setWorkspaces(response.data);
     } catch (error) {
       console.error('Error fetching workspaces:', error);
     }
   };
 
-  const fetchStarredBoards = async (workspaceId: string, workspace: any) => {
-    const instance = axios.create({
-      baseURL: 'http://localhost:3000',
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      timeout: 1000,
-    });
+  // Fetch starred boards for each workspace
+  const fetchStarredBoards = async (workspaceId: string, workspace: Workspace) => {
+    const instance = createAxiosInstance();
+    if (!instance) return;
 
     try {
       const starredBoardResponse = await instance.get(`/workspaces/${workspace.id}/starred-boards`);
@@ -64,36 +83,41 @@ export const Navbar = () => {
           title: board.board.title,
         }));
 
-      setStarredBoardsByWorkspace((prev: any) => ({
+      setStarredBoardsByWorkspace((prev) => ({
         ...prev,
         [workspaceId]: starredBoardsData,
       }));
     } catch (error) {
-      console.error('Error fetching starred boards for workspace', workspaceId, ':', error);
+      console.error("Error fetching starred boards for workspace", workspaceId, ":", error);
     }
   };
 
+  // Create a new workspace
+  const createWorkspace = async (title: string) => {
+    const instance = createAxiosInstance();
+    if (!instance) return;
+
+    try {
+      const response = await instance.post<Workspace>(
+        'http://localhost:3000/workspaces',
+        { title }
+      );
+      setWorkspaces((prevWorkspaces) => [...prevWorkspaces, response.data]);
+    } catch (error) {
+      console.error('Error creating workspace:', error);
+    }
+  };
+
+  // Load recent boards from localStorage
   useEffect(() => {
     const recentBoardsFromStorage = localStorage.getItem("recentBoards");
     if (recentBoardsFromStorage) {
       setRecentBoards(JSON.parse(recentBoardsFromStorage));
     }
     fetchWorkspaces();
-    
-    // Set interval to refresh workspaces and starred boards every 5 minutes (300000 ms)
-    const intervalId = setInterval(() => {
-      fetchWorkspaces();
-      if (workspaces.length > 0) {
-        workspaces.forEach((workspace) => {
-          fetchStarredBoards(workspace.id, workspace);
-        });
-      }
-    }, 5000); 
+  }, []);
 
-    // Clean up the interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [workspaces]); // Empty dependency to fetch data only on mount and at the interval
-
+  // Fetch starred boards after workspaces are loaded
   useEffect(() => {
     if (workspaces.length > 0) {
       workspaces.forEach((workspace) => {
@@ -104,116 +128,27 @@ export const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="navbar-left">
-        <div className="navbar-icon-title" onClick={handleHomeClick}>
-          <FaTrello className="navbar-icon" />
-          <span className="navbar-title">Trello</span>
-        </div>
-
-        {/* Workspace Dropdown */}
-        <div className="navbar-dropdown" onClick={() => toggleDropdown("workspace")}>
-          Workspace <FaChevronDown className="navbar-dropdown-icon" />
-          {openDropdown === "workspace" && (
-            <div className="navbar-dropdown-content">
-              {workspaces.length > 0 ? (
-                workspaces.map((workspace) => (
-                  <div
-                    key={workspace.id}
-                    onClick={() => navigate(`/workspace/${workspace.id}`)}
-                    className="navbar-dropdown-item"
-                  >
-                    {workspace.title}
-                  </div>
-                ))
-              ) : (
-                <div>No workspaces available</div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Recently Dropdown */}
-        <div className="navbar-dropdown" onClick={() => toggleDropdown("recently")}>
-          Recently <FaChevronDown className="navbar-dropdown-icon" />
-          {openDropdown === "recently" && (
-            <div className="navbar-dropdown-content">
-              {recentBoards.length > 0 ? (
-                recentBoards.map((board) => (
-                  <div
-                    key={board.id}
-                    onClick={() => navigate(`/workspace/${board.workspaceId}/board/${board.id}`)}
-                    className="navbar-dropdown-item"
-                  >
-                    {board.title}
-                  </div>
-                ))
-              ) : (
-                <div>No recent boards</div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Starred Dropdown */}
-        <div className="navbar-dropdown" onClick={() => toggleDropdown("starred")}>
-          Starred <FaChevronDown className="navbar-dropdown-icon" />
-          {openDropdown === "starred" && (
-            <div className="navbar-dropdown-content">
-              {workspaces.length > 0 ? (
-                workspaces.map((workspace) => (
-                  <div key={workspace.id}>
-                    <div className="navbar-dropdown-item workspace-title">
-                      {workspace.title}
-                    </div>
-                    {starredBoardsByWorkspace[workspace.id] && starredBoardsByWorkspace[workspace.id].length > 0 ? (
-                      starredBoardsByWorkspace[workspace.id].map((board: any) => (
-                        <div
-                          key={board.id}
-                          onClick={() => {
-                            saveToRecentlyBoards(board);
-                            navigate(`/workspace/${workspace.id}/board/${board.id}`);
-                          }}
-                          className="navbar-dropdown-item"
-                        >
-                          {board.title}
-                        </div>
-                      ))
-                    ) : (
-                      <div>No starred boards</div>
-                    )}
-                  </div>
-                ))
-              ) : (
-                <div>No workspaces available</div>
-              )}
-            </div>
-          )}
-        </div>
-
-        <button className="navbar-button">Create</button>
-      </div>
-
-      <div className="navbar-right">
-        <div className="navbar-search">
-          <FaSearch className="navbar-icon" />
-          <input type="text" placeholder="Search" />
-        </div>
-
-        {/* User Dropdown */}
-        <div className="navbar-dropdown" onClick={() => toggleDropdown("user")}>
-          <FaUserCircle className="user-icon" />
-          {openDropdown === "user" && (
-            <div className="navbar-dropdown-content">
-              {user && (
-                <>
-                  <div>Welcome, {user.email}</div>
-                  <div onClick={handleLogoutClick}>Logout</div>
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
+      <NavbarLeft
+        workspaces={workspaces}
+        openDropdown={openDropdown}
+        toggleDropdown={toggleDropdown}
+        recentBoards={recentBoards}
+        starredBoardsByWorkspace={starredBoardsByWorkspace}
+        saveToRecentlyBoards={saveToRecentlyBoards}
+        navigate={navigate}
+        showCreateWorkspaceForm={showCreateWorkspaceForm}
+        setShowCreateWorkspaceForm={setShowCreateWorkspaceForm}
+        createWorkspace={createWorkspace}
+      />
+      <NavbarRight
+        user={user}
+        logout={logout}
+        navigate={navigate}
+        openDropdown={openDropdown}
+        toggleDropdown={toggleDropdown}
+      />
     </div>
   );
 };
+
+export default Navbar;

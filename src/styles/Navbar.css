@@ -129,6 +129,38 @@
   background-color: #4c5358;
 }
 
+/* Show Dropdown When Active */
+.navbar-dropdown.open .navbar-dropdown-content {
+  display: block;
+}
+
+/* Create Workspace Button */
+.create-workspace button {
+  background-color: #0079bf;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.create-workspace button:hover {
+  background-color: #005d81;
+}
+
+/* Modal for Creating Workspace */
+.create-workspace-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 /* Sağ Taraf */
 .navbar-right {
   display: flex;
@@ -236,10 +268,11 @@
   border-bottom: 1px solid #4c5358; /* Başlık ile board arasında ayraç */
 }
 
+
 /* Board öğeleri */
 .navbar-dropdown-content .navbar-dropdown-item.board-item {
   padding-left: 30px; /* Boardlar için sol boşluk */
-  color: #b0bec5; /* Daha açık gri renk */
+  color: #d9d9d9; /* Daha açık gri renk */
   font-size: 14px; /* Board metni için boyut */
   background-color: #3d474e; /* Board arka plan rengi */
   border-radius: 5px; /* Yuvarlatılmış köşeler */

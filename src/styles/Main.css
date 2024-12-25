@@ -1,0 +1,154 @@
+/* Genel Layout */
+.app-layout {
+    display: flex;
+    height: 100vh; /* Tüm ekran yüksekliğini kaplar */
+    background-color: #0e1117; /* Daha koyu ve modern arka plan rengi */
+    color: #e0e0e0; /* Genel metin için açık gri renk */
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    font-size: 16px; /* Daha iyi okunabilirlik için temel yazı boyutu */
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #20232a 0%, #2c313c 100%);
+    border-right: 1px solid #3a3f4a; /* Hafif çerçeve */
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Yumuşak gölge efekti */
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    color: #b0b3b8; /* Nötr ton */
+    padding: 12px 20px;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .sidebar a:hover {
+    background-color: #3a3f4a; /* Hover efekti için daha belirgin renk */
+    color: #ffffff; /* Beyaz metin */
+    transform: scale(1.03); /* Hafif büyüme efekti */
+  }
+  
+  .sidebar .active {
+    background-color: #4a90e2; /* Aktif eleman için mavi */
+    color: white;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.4); /* Aktif öğeye gölge */
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex-grow: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background-color: #161b22; /* İçerik bölgesi için koyu ton */
+    border-radius: 15px 0 0 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Başlıklar */
+  .main-content h1,
+  .main-content h2,
+  .main-content h3 {
+    color: #ffffff; /* Beyaz başlıklar */
+    margin-bottom: 20px;
+    font-weight: bold;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 5px;
+  }
+  
+  /* Formlar */
+  .main-content form {
+    margin-top: 25px;
+  }
+  
+  .main-content input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #3a3f4a;
+    border-radius: 8px;
+    background-color: #20232a;
+    color: #e0e0e0;
+    font-size: 15px;
+  }
+  
+  .main-content input::placeholder {
+    color: #8a8f97; /* Placeholder için daha yumuşak ton */
+  }
+  
+  .main-content input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.7);
+  }
+  /* Hata ve Bilgilendirme Mesajları */
+  .error-message {
+    color: #e74c3c; /* Kırmızı hata mesajı */
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  
+  .success-message {
+    color: #2ecc71; /* Yeşil başarı mesajı */
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  /* Butonlar */
+.main-content button {
+    background-color: #579dff; /* Ana mavi renk */
+    color: white; /* Beyaz metin */
+    border: none; /* Kenarlık yok */
+    padding: 12px 20px; /* Buton iç dolgu */
+    border-radius: 6px; /* Köşelerde yuvarlaklık */
+    cursor: pointer;
+    font-size: 14px; /* Yazı boyutu */
+    font-weight: bold; /* Kalın yazı */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Geçişler */
+    margin: 0 10px; /* Yatayda boşluk */
+}
+
+.main-content button:hover {
+    background-color: #4a90e2; /* Hover durumunda koyu mavi */
+    transform: translateY(-2px); /* Hafif yukarı hareket */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
+}
+
+.main-content button:active {
+    background-color: #357abd; /* Tıklama durumunda daha koyu mavi */
+    transform: translateY(0); /* Tıklama sırasında geri sıfırlama */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1); /* Daha küçük gölge */
+}
+
+/* Cancel Button */
+button.cancel {
+    background-color: #e74c3c; /* Kırmızı arka plan rengi */
+    color: white; /* Beyaz yazı rengi */
+    border: none; /* Kenarlık yok */
+    padding: 12px 20px; /* İç dolgu */
+    border-radius: 6px; /* Yuvarlak köşeler */
+    cursor: pointer; /* İmleç tipi */
+    font-size: 14px; /* Yazı boyutu */
+    font-weight: bold; /* Kalın yazı */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Geçişler */
+}
+
+button.cancel:hover {
+    background-color: #c0392b; /* Hover durumunda daha koyu kırmızı */
+    transform: translateY(-2px); /* Hafif yukarı hareket */
+}
+
+button.cancel:active {
+    background-color: #a93226; /* Tıklama durumunda daha koyu kırmızı */
+    transform: translateY(0); /* Tıklama sırasında geri sıfırlama */
+}
