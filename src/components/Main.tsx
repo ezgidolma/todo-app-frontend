@@ -18,6 +18,7 @@ interface Board {
 
 export const Main = () => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
+  // @ts-ignore
   const [isLoading, setIsLoading] = useState(false);
   const [activeWorkspace, setActiveWorkspace] = useState<string | null>(null);
   const [selectedMenu, setSelectedMenu] = useState('home');
@@ -28,6 +29,7 @@ export const Main = () => {
   const [workspaceTitleEdit, setWorkspaceTitleEdit] = useState('');
   const [showCreateWorkspaceForm, setShowCreateWorkspaceForm] = useState(false);
   const [newWorkspaceTitle, setNewWorkspaceTitle] = useState('');
+  // @ts-ignore
   const [error, setError] = useState<string | null>(null);
   const { boardId } = useParams<{ boardId: string }>();
   const navigate = useNavigate();

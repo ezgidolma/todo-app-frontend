@@ -65,6 +65,7 @@ export const MainContent: React.FC<MainContentProps> = ({
 }) => {
   const [activeBoard, setActiveBoard] = useState<Board | null>(null);  // Aktif board state'i
 
+  // @ts-ignore
   const handleBoardSelect = (boardId: string) => {
     const selectedBoard = boards[activeWorkspace!].find(board => board.id === boardId);
     setActiveBoard(selectedBoard || null);  // Aktif board'ı set et
