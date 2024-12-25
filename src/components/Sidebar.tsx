@@ -43,6 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     },
   });
 
+  // @ts-ignore
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchWorkspaces = async () => {
