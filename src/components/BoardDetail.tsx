@@ -39,7 +39,7 @@ export const BoardDetail: React.FC<BoardDetailProps> = ({ boardId }) => {
     }
 
     return axios.create({
-      baseURL: "http://localhost:3000",
+      baseURL: "https://seashell-app-2wf3u.ondigitalocean.app",
       headers: { Authorization: `Bearer ${token}` },
       timeout: 1000,
     });

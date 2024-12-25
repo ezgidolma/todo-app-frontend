@@ -33,7 +33,7 @@ export const Main = () => {
   const navigate = useNavigate();
 
   const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://seashell-app-2wf3u.ondigitalocean.app',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
@@ -127,7 +127,7 @@ export const Main = () => {
     isStarred: boolean
   ) => {
     try {
-      const url = `http://localhost:3000/boards/${boardId}/${isStarred ? 'unstar' : 'star'}`;
+      const url = `https://seashell-app-2wf3u.ondigitalocean.app/boards/${boardId}/${isStarred ? 'unstar' : 'star'}`;
       await instance.patch(url);
 
       const updatedBoard = boards[workspaceId]?.find((board) => board.id === boardId);

@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (user: { email: string; password: string }) => {
     const instance = axios.create({
-      baseURL: 'http://localhost:3000',
+      baseURL: 'https://seashell-app-2wf3u.ondigitalocean.app',
       timeout: 1000, // Opsiyonel: Timeout süresi
     });
   
@@ -97,7 +97,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const register = async (user: { email: string; password: string }) => {  // Kayıt olmak için kullanılan fonksiyon
     const instance = axios.create({
-      baseURL: 'http://localhost:3000',
+      baseURL: 'https://seashell-app-2wf3u.ondigitalocean.app',
       timeout: 1000, // İsteğe bağlı
     });
     

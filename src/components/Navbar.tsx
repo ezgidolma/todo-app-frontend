@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
     }
 
     return axios.create({
-      baseURL: "http://localhost:3000",
+      baseURL: "https://seashell-app-2wf3u.ondigitalocean.app",
       headers: { Authorization: `Bearer ${token}` },
       timeout: 1000,
     });
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
     if (!instance) return;
 
     try {
-      const response = await instance.get<Workspace[]>('http://localhost:3000/workspaces');
+      const response = await instance.get<Workspace[]>('https://seashell-app-2wf3u.ondigitalocean.app/workspaces');
       setWorkspaces(response.data);
     } catch (error) {
       console.error('Error fetching workspaces:', error);
@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
 
     try {
       const response = await instance.post<Workspace>(
-        'http://localhost:3000/workspaces',
+        'https://seashell-app-2wf3u.ondigitalocean.app/workspaces',
         { title }
       );
       setWorkspaces((prevWorkspaces) => [...prevWorkspaces, response.data]);

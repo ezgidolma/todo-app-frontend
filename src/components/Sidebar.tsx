@@ -37,7 +37,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const navigate = useNavigate();
 
   const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://seashell-app-2wf3u.ondigitalocean.app',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
